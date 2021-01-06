@@ -12,10 +12,10 @@ function Footer() {
 				<a href="https://www.youtube.com/c/DevSuperior" target="_new">
 					<YouTubeIcon/>
 				</a>
-				<a href="#" target="_new">
+				<a href="link" target="_new">
 					<LinkedInIcon/>
 				</a>
-				<a href="#" target="_new">
+				<a href="link" target="_new">
 					<InstagramIcon/>
 				</a>
 			</div>
