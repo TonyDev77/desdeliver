@@ -49,17 +49,16 @@ function Orders() {
 			.then((response) => {
 				// TODO
 				if (productsIds.length < 1) {
-					toast.error('Selecione ao menos um item')
-					throw new Error();
+					throw new Error("Ops! Nenhum item selecionado!");
 				} else if (payload.address == null) {
-					toast.error('Selecione um endereço')
-					throw new Error();
+					throw new Error("Ops! Faltou inserir o endereço!");
+				} else {
+					toast.error(`Pedido enviado com sucesso! Nº ${response.data.id} `);
+					setSelectedProducts([]);
 				}
-				setSelectedProducts([]);
-				toast.success(`Pedido enviado com sucesso! Nº ${response.data.id} `);
-		})
-			.catch(() => {
-				toast.warning('Vamos tentar de novo?');
+			})
+			.catch((e) => {
+				toast.warning(e.message);
 			})
 	}
 
