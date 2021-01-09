@@ -47,11 +47,19 @@ function Orders() {
 
 		saveOrder(payload)
 			.then((response) => {
-				toast.error(`Pedido enviado com sucesso! Nº ${response.data.id} `);
+				// TODO
+				if (productsIds.length < 1) {
+					toast.error('Selecione ao menos um item')
+					throw new Error();
+				} else if (payload.address == null) {
+					toast.error('Selecione um endereço')
+					throw new Error();
+				}
 				setSelectedProducts([]);
+				toast.success(`Pedido enviado com sucesso! Nº ${response.data.id} `);
 		})
 			.catch(() => {
-				toast.warning('Erro ao enviar pedido');
+				toast.warning('Vamos tentar de novo?');
 			})
 	}
 
