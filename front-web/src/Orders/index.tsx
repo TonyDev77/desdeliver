@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from "react";
-import { toast} from 'react-toastify';
+import {toast} from 'react-toastify';
 import './styles.css'
 import StepsHeader from "../StepsHeader";
 import ProductsList from "./ProductsList";
@@ -39,27 +39,27 @@ function Orders() {
 	}
 
 	const handleSubmit = () => {
-		const productsIds = selectedProducts.map(({ id }) => ({ id }));
+		const productsIds = selectedProducts.map(({id}) => ({id}));
 		const payload = {
 			...orderLocation!,
 			products: productsIds
 		}
 
-		saveOrder(payload)
-			.then((response) => {
-				// TODO
-				if (productsIds.length < 1) {
-					throw new Error("Ops! Nenhum item selecionado!");
-				} else if (payload.address == null) {
-					throw new Error("Ops! Faltou inserir o endereço!");
-				} else {
-					toast.error(`Pedido enviado com sucesso! Nº ${response.data.id} `);
-					setSelectedProducts([]);
-				}
-			})
-			.catch((e) => {
-				toast.warning(e.message);
-			})
+		// TODO
+		if (productsIds.length < 1) {
+			toast.warning("Ops! Nenhum item selecionado!");
+			//throw new Error("Ops! Nenhum item selecionado!");
+		} else if (payload.address == null) {
+			//throw new Error("Ops! Faltou inserir o endereço!");
+			toast.warning("Ops! Faltou inserir o endereço!");
+		} else {
+			saveOrder(payload).then((response) => {
+				toast.error(`Pedido enviado com sucesso! Nº ${response.data.id} `);
+				setSelectedProducts([]);
+			}).catch((e) => {
+					toast.warning(e.message);
+				})
+		}
 	}
 
 	return (
